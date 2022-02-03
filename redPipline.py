@@ -44,7 +44,7 @@ class RedPipeline:
 
         self.__find_blobs_input = self.cv_dilate_output
         self.__find_blobs_min_area = 1.0
-        self.__find_blobs_circularity = [0.49160671748703333, 1.0]
+        self.__find_blobs_circularity = [0, 1.0]
         self.__find_blobs_dark_blobs = False
 
         self.find_blobs_output = None
@@ -56,7 +56,7 @@ class RedPipeline:
         """
         # Step Blur0:
         self.__blur_input = source0
-        (self.blur_output) = self.__blur(self.__blur_input, self.__blur_type, self.__blur_radius)
+        self.blur_output = self.__blur(self.__blur_input, self.__blur_type, self.__blur_radius)
 
         # Step RGB_Threshold0:
         self.__rgb_threshold_input = self.blur_output
