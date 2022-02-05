@@ -11,7 +11,7 @@
         <value>GAUSSIAN</value>
       </grip:Input>
       <grip:Input step="0" socket="2">
-        <value>8.113207547169814</value>
+        <value>7.212306646268914</value>
       </grip:Input>
       <grip:Output step="0" socket="0" previewed="true"/>
     </grip:Step>
@@ -19,13 +19,13 @@
       <grip:Input step="1" socket="0"/>
       <grip:Input step="1" socket="1">
         <value>
-          <double>168.02259024927173</double>
+          <double>124.3175542780487</double>
           <double>180.0</double>
         </value>
       </grip:Input>
       <grip:Input step="1" socket="2">
         <value>
-          <double>113.65347406958456</double>
+          <double>67.79016471706657</double>
           <double>255.0</double>
         </value>
       </grip:Input>
@@ -63,21 +63,52 @@
       <grip:Input step="3" socket="5"/>
       <grip:Output step="3" socket="0" previewed="true"/>
     </grip:Step>
-    <grip:Step name="Find Blobs">
+    <grip:Step name="Find Contours">
       <grip:Input step="4" socket="0"/>
       <grip:Input step="4" socket="1">
-        <value>1.0</value>
-      </grip:Input>
-      <grip:Input step="4" socket="2">
-        <value>
-          <double>0.736427773845816</double>
-          <double>1.0</double>
-        </value>
-      </grip:Input>
-      <grip:Input step="4" socket="3">
         <value>false</value>
       </grip:Input>
-      <grip:Output step="4" socket="0" previewed="true"/>
+      <grip:Output step="4" socket="0" previewed="false"/>
+    </grip:Step>
+    <grip:Step name="Filter Contours">
+      <grip:Input step="5" socket="0"/>
+      <grip:Input step="5" socket="1">
+        <value>0</value>
+      </grip:Input>
+      <grip:Input step="5" socket="2">
+        <value>0</value>
+      </grip:Input>
+      <grip:Input step="5" socket="3">
+        <value>0</value>
+      </grip:Input>
+      <grip:Input step="5" socket="4">
+        <value>1000</value>
+      </grip:Input>
+      <grip:Input step="5" socket="5">
+        <value>0</value>
+      </grip:Input>
+      <grip:Input step="5" socket="6">
+        <value>1000</value>
+      </grip:Input>
+      <grip:Input step="5" socket="7">
+        <value>
+          <int>0</int>
+          <int>100</int>
+        </value>
+      </grip:Input>
+      <grip:Input step="5" socket="8">
+        <value>1000000</value>
+      </grip:Input>
+      <grip:Input step="5" socket="9">
+        <value>0</value>
+      </grip:Input>
+      <grip:Input step="5" socket="10">
+        <value>0</value>
+      </grip:Input>
+      <grip:Input step="5" socket="11">
+        <value>1000</value>
+      </grip:Input>
+      <grip:Output step="5" socket="0" previewed="true"/>
     </grip:Step>
   </steps>
   <connections>
@@ -86,16 +117,12 @@
       <grip:Input step="3" socket="0"/>
     </grip:Connection>
     <grip:Connection>
+      <grip:Output step="4" socket="0" previewed="false"/>
+      <grip:Input step="5" socket="0"/>
+    </grip:Connection>
+    <grip:Connection>
       <grip:Output step="3" socket="0" previewed="true"/>
       <grip:Input step="4" socket="0"/>
-    </grip:Connection>
-    <grip:Connection>
-      <grip:Output source="0" socket="0" previewed="true"/>
-      <grip:Input step="0" socket="0"/>
-    </grip:Connection>
-    <grip:Connection>
-      <grip:Output step="0" socket="0" previewed="true"/>
-      <grip:Input step="1" socket="0"/>
     </grip:Connection>
     <grip:Connection>
       <grip:Output step="1" socket="0" previewed="true"/>
@@ -113,10 +140,10 @@
   </settings>
   <codeGenerationSettings>
     <language>Python</language>
-    <className>GripPipeline</className>
+    <className>SuperNewRedPipeline</className>
     <implementWpilibPipeline>false</implementWpilibPipeline>
-    <saveDir>C:\Users\dsalkin\Desktop\MorTorqRobotics\GRIP</saveDir>
+    <saveDir>C:\Users\hchechel\Downloads\2022-Vision</saveDir>
     <packageName></packageName>
-    <moduleName>grip</moduleName>
+    <moduleName>supernewgrippp</moduleName>
   </codeGenerationSettings>
 </grip:Pipeline>

@@ -1,15 +1,10 @@
 import cv2
-from bluePipeline import BluePipeline
-#
-# from grip import GripPipeline
-from newgrip import NewRedPipeline
-from supernewgrip import SuperNewRedPipeline
-from supernewgripp import SuperNewBluePipeline
+from bluePipeline import bluePipeline
+from redPipeline import redPipeline
 
-cap = cv2.VideoCapture(0)
-blue = SuperNewBluePipeline()
-red = SuperNewRedPipeline()
-'''
+cap = cv2.VideoCapture(1)
+blue = bluePipeline()
+red = redPipeline()
 while True:
     ret, frame = cap.read()
 
@@ -39,5 +34,6 @@ while True:
     cv2.imshow('frame2', img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+'''
 cap.release()
 cv2.destroyAllWindows()
