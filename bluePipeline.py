@@ -19,7 +19,7 @@ class bluePipeline:
 
         self.__hsv_threshold_input = self.blur_output
         self.__hsv_threshold_hue = [93.56215859459547, 110.3030303030303]
-        self.__hsv_threshold_saturation = [60.91066831418888, 188.45959595959596]
+        self.__hsv_threshold_saturation = [154, 210]
         self.__hsv_threshold_value = [45.86330935251798, 255.0]
 
         self.hsv_threshold_output = None
@@ -27,7 +27,7 @@ class bluePipeline:
         self.__cv_erode_src = self.hsv_threshold_output
         self.__cv_erode_kernel = None
         self.__cv_erode_anchor = (-1, -1)
-        self.__cv_erode_iterations = 20.0
+        self.__cv_erode_iterations = 3
         self.__cv_erode_bordertype = cv2.BORDER_DEFAULT
         self.__cv_erode_bordervalue = (-1)
 
@@ -36,7 +36,7 @@ class bluePipeline:
         self.__cv_dilate_src = self.cv_erode_output
         self.__cv_dilate_kernel = None
         self.__cv_dilate_anchor = (-1, -1)
-        self.__cv_dilate_iterations = 23.0
+        self.__cv_dilate_iterations = 10
         self.__cv_dilate_bordertype = cv2.BORDER_CONSTANT
         self.__cv_dilate_bordervalue = (-1)
 
@@ -232,7 +232,7 @@ class bluePipeline:
                     circleArea = radius * radius * math.pi
                     print(circleArea)
                     print(area)
-                    if circleArea <= area+15000 and circleArea >= area-000:
+                    if circleArea <= area+(circleArea/3) and circleArea >= area-(circleArea/3):
                         contour_list.append(contour)
 
         return contour_list
