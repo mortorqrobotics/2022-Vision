@@ -18,8 +18,8 @@ class bluePipeline:
         self.blur_output = None
 
         self.__hsv_threshold_input = self.blur_output
-        self.__hsv_threshold_hue = [93.56215859459547, 110.3030303030303]
-        self.__hsv_threshold_saturation = [154, 210]
+        self.__hsv_threshold_hue = [86, 112]
+        self.__hsv_threshold_saturation = [122, 249]
         self.__hsv_threshold_value = [45.86330935251798, 255.0]
 
         self.hsv_threshold_output = None
@@ -222,16 +222,16 @@ class bluePipeline:
             for contour in output:
                 approx = cv2.approxPolyDP(contour,0.01*cv2.arcLength(contour,True),True)
                 area = cv2.contourArea(contour)
-                '''
-                if ((len(approx) > 8) & (area > 30) ):
-                    contour_list.append(contour)
-                '''
                 if len(approx)>=8:
                     area = cv2.contourArea(contour)
                     (cx, cy), radius = cv2.minEnclosingCircle(contour)
                     circleArea = radius * radius * math.pi
-                    print(circleArea)
-                    print(area)
+                    def findDist(area):
+                        dis = 615000*(1/(area+2000))+12.2
+                        return dis
+                    print(findDist(circleArea))
+                    #print(circleArea)
+                    #print(area)
                     if circleArea <= area+(circleArea/3) and circleArea >= area-(circleArea/3):
                         contour_list.append(contour)
 
