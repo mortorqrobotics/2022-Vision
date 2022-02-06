@@ -11,6 +11,7 @@ class bluePipeline:
     def __init__(self):
         """initializes all values to presets or None if need to be set
         """
+        cap = cv2.VideoCapture(0)
 
         self.__blur_type = BlurType.Gaussian_Blur
         self.__blur_radius = 7.212306646268914
@@ -61,6 +62,7 @@ class bluePipeline:
         self.__filter_contours_max_ratio = 1000
 
         self.filter_contours_output = None
+        self.__filter_contours_width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 
 
     def process(self, source0):
@@ -89,7 +91,7 @@ class bluePipeline:
 
         # Step Filter_Contours0:
         self.__filter_contours_contours = self.find_contours_output
-        (self.filter_contours_output) = self.__filter_contours(self.__filter_contours_contours, self.__filter_contours_min_area, self.__filter_contours_min_perimeter, self.__filter_contours_min_width, self.__filter_contours_max_width, self.__filter_contours_min_height, self.__filter_contours_max_height, self.__filter_contours_solidity, self.__filter_contours_max_vertices, self.__filter_contours_min_vertices, self.__filter_contours_min_ratio, self.__filter_contours_max_ratio)
+        (self.filter_contours_output) = self.__filter_contours(self.__filter_contours_contours, self.__filter_contours_min_area, self.__filter_contours_min_perimeter, self.__filter_contours_min_width, self.__filter_contours_max_width, self.__filter_contours_min_height, self.__filter_contours_max_height, self.__filter_contours_solidity, self.__filter_contours_max_vertices, self.__filter_contours_min_vertices, self.__filter_contours_min_ratio, self.__filter_contours_max_ratio, self.__filter_contours_width)
 
 
     @staticmethod
@@ -178,7 +180,7 @@ class bluePipeline:
     @staticmethod
     def __filter_contours(input_contours, min_area, min_perimeter, min_width, max_width,
                         min_height, max_height, solidity, max_vertex_count, min_vertex_count,
-                        min_ratio, max_ratio):
+                        min_ratio, max_ratio, width):
         """Filters out contours that do not meet certain criteria.
         Args:
             input_contours: Contours as a list of numpy.ndarray.
@@ -226,15 +228,17 @@ class bluePipeline:
                     area = cv2.contourArea(contour)
                     (cx, cy), radius = cv2.minEnclosingCircle(contour)
                     circleArea = radius * radius * math.pi
-                    def findDist(area):
-                        dis = 615000*(1/(area+2000))+12.2
-                        return dis
-                    print(findDist(circleArea))
-                    #print(circleArea)
-                    #print(area)
                     if circleArea <= area+(circleArea/3) and circleArea >= area-(circleArea/3):
                         contour_list.append(contour)
-
+                    def findDist(area):
+                        dis = 615000*(1/(area+2000))+12.2
+                        meters = round((0.0254*dis), 3)
+                        return meters
+                    def offset(cx,width):
+                        return width/2-cx
+                    if contour_list: 
+                        #print(findDist(circleArea))
+                        print(offset(cx, width))
         return contour_list
 
 

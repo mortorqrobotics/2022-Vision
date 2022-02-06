@@ -1,10 +1,12 @@
-import cv2
 from bluePipeline import bluePipeline
 from redPipeline import redPipeline
+import cv2, cv
+import time
 
 cap = cv2.VideoCapture(0)
 blue = bluePipeline()
-red = redPipeline()
+red = bluePipeline()
+
 '''
 def MinMax():
     red.__hsv_threshold_hue[0] = cv2.getTrackbarPos('red_H_min','controls')
@@ -14,7 +16,9 @@ cv2.createTrackbar('red_H_min',  'controls', 0, 180, min)
 cv2.createTrackbar('red_H_max',  'controls', 0, 180, max)
 cv2.resizeWindow('controls', 500, 1)
 '''
+
 while True:
+    # printing distance from pipeline code
     ret, frame = cap.read()
     red.process(frame)
     cv2.imshow('frame', red.cv_dilate_output)
