@@ -230,15 +230,6 @@ class bluePipeline:
                     circleArea = radius * radius * math.pi
                     if circleArea <= area+(circleArea/3) and circleArea >= area-(circleArea/3):
                         contour_list.append(contour)
-                    def findDist(area):
-                        dis = 615000*(1/(area+2000))+12.2
-                        meters = round((0.0254*dis), 3)
-                        return meters
-                    def offset(cx,width):
-                        return width/2-cx
-                    if contour_list: 
-                        #print(findDist(circleArea))
-                        print(offset(cx, width))
         return contour_list
 
 

@@ -225,27 +225,12 @@ class redPipeline:
             for contour in output:
                 approx = cv2.approxPolyDP(contour,0.01*cv2.arcLength(contour,True),True)
                 area = cv2.contourArea(contour)
-                '''
-                if ((len(approx) > 8) & (area > 30) ):
-                    contour_list.append(contour)
-                '''
                 if len(approx)>=8:
                     area = cv2.contourArea(contour)
                     (cx, cy), radius = cv2.minEnclosingCircle(contour)
                     circleArea = radius * radius * math.pi
                     if circleArea <= area+(circleArea/3) and circleArea >= area-(circleArea/3):
                         contour_list.append(contour)
-                    def findDist(area):
-                        dis = 615000*(1/(area+2000))+12.2
-                        meters = round((0.0254*dis), 3)
-                        return meters
-                    def offset(cx,width):
-                        return width/2-cx
-                    if contour_list: 
-                        #print(findDist(circleArea))
-                        print(offset(cx,width))
         return contour_list
-
-
 BlurType = Enum('BlurType', 'Box_Blur Gaussian_Blur Median_Filter Bilateral_Filter')
 
