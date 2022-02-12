@@ -12,7 +12,7 @@ notified = [False]
 NetworkTables.initialize(server='10.15.15.2')
 table = NetworkTables.getTable('FRCMap')
 
-crap = cv2.Videocrapture(0)
+crap = cv2.VideoCapture(0)
 
 blue = bluePipeline()
 red = bluePipeline()

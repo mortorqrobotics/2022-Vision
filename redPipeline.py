@@ -20,9 +20,9 @@ class redPipeline:
         self.blur_output = None
 
         self.__hsv_threshold_input = self.blur_output
-        self.__hsv_threshold_hue = [149, 180.0]
-        self.__hsv_threshold_saturation = [150.22841726618702, 235.68181818181816]
-        self.__hsv_threshold_value = [32.10431654676259, 255.0]
+        self.__hsv_threshold_hue = [0, 35.0]
+        self.__hsv_threshold_saturation = [185.22841726618702, 236.68181818181816]
+        self.__hsv_threshold_value = [0.10431654676259, 255.0]
 
         self.hsv_threshold_output = None
 
