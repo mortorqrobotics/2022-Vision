@@ -3,9 +3,10 @@ from redPipeline import redPipeline
 import cv2, cv
 import time
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
+cap.set(cv2.CAP_PROP_EXPOSURE,-7)
 blue = bluePipeline()
-red = bluePipeline()
+red = redPipeline()
 
 '''
 def MinMax():
