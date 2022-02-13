@@ -19,8 +19,8 @@ class bluePipeline:
         self.blur_output = None
 
         self.__hsv_threshold_input = self.blur_output
-        self.__hsv_threshold_hue = [86, 112]
-        self.__hsv_threshold_saturation = [122, 249]
+        self.__hsv_threshold_hue = [47, 120]
+        self.__hsv_threshold_saturation = [120, 249]
         self.__hsv_threshold_value = [45.86330935251798, 255.0]
 
         self.hsv_threshold_output = None

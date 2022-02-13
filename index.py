@@ -4,6 +4,7 @@ import cv2, cv
 import time
 
 cap = cv2.VideoCapture(1)
+#-5 for blue, -7 for red
 cap.set(cv2.CAP_PROP_EXPOSURE,-7)
 blue = bluePipeline()
 red = redPipeline()
