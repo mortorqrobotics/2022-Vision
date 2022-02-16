@@ -1,6 +1,4 @@
-from turtle import width
 import cv2
-import cv
 import numpy
 import math
 from enum import Enum

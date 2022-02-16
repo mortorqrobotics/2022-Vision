@@ -1,6 +1,6 @@
 from bluePipeline import bluePipeline
 from redPipeline import redPipeline
-import cv2, cv
+import cv2
 import time
 
 cap = cv2.VideoCapture(0)
