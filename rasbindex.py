@@ -38,8 +38,8 @@ def sendToTables(pipeline):
     distance = findDist(cv2.contourArea(contour))
     (cx, cy), radius = cv2.minEnclosingCircle(contour)
     width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-    offset = offset(cx, width)
-    table.putNumber("Offset: ", offset)
+    ballOffset = offset(cx, width)
+    table.putNumber("Offset: ", ballOffset)
     table.putNumber("Distance: ", distance)
 
 while True:
