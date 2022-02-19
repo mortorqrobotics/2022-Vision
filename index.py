@@ -1,10 +1,12 @@
 from bluePipeline import bluePipeline
 from redPipeline import redPipeline
+from redPipeline2 import redPipeline2
 import cv2
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
+cap.set(cv2.CAP_PROP_EXPOSURE,-3.75)
 blue = bluePipeline(cap)
-red = bluePipeline(cap)
+red = redPipeline2()
 while True:
     # printing distance from pipeline code
     ret, frame = cap.read()
