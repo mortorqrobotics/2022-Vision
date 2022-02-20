@@ -8,8 +8,8 @@ table = NetworkTables.getTable('FRCMap')
 
 cap = cv2.VideoCapture(0)
 
-blue = bluePipeline(cap)
-red = redPipeline(cap)
+blue = bluePipeline()
+red = redPipeline()
 
 #extract distance from visdible area of ball 
 def findDist(area):
@@ -35,11 +35,11 @@ def sendToTables(pipeline):
             maxIndex = i
     contour = contours[maxIndex]
     #sending distance and offset to network tables
-    distance = findDist(cv2.contourArea(contour))
+    distance = findDist(cv2.contourArea(contour)/2)
     (cx, cy), radius = cv2.minEnclosingCircle(contour)
-    width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-    ballOffset = offset(cx, width)
-    table.putNumber("Offset: ", ballOffset)
+    width = 320
+    lol = offset(cx, width)
+    table.putNumber("Offset: ", lol)
     table.putNumber("Distance: ", distance)
 
 while True:
@@ -47,5 +47,3 @@ while True:
         sendToTables(red)
     elif table.getBoolean("Alliance: ", 0) == 2:
         sendToTables(blue)
-cap.release()
-cv2.destroyAllWindows()
