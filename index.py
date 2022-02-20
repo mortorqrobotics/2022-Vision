@@ -2,7 +2,7 @@ from bluePipeline import bluePipeline
 from redPipeline import redPipeline
 import cv2
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 # 39000, 34000
 #3600, 3200
 #900, 700
@@ -37,9 +37,9 @@ while True:
                 maxIndex = i
         contour = contours[maxIndex]
         #sending distance and offset to network tables
-        print(cv2.contourArea(contour)*4)
+        print(findDist(cv2.contourArea(contour)))
         (cx, cy), radius = cv2.minEnclosingCircle(contour)
-        width = 360
+        width = 480
         #print(offset(cx, width))
     cv2.drawContours(image=img, contours=red.filter_contours_output, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
     if cv2.waitKey(1) & 0xFF == ord('q'):
