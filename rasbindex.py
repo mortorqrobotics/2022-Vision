@@ -3,6 +3,8 @@ from redPipeline import redPipeline
 from networktables import NetworkTables
 import cv2
 
+#bottom of camera 15 inches above ground, and angle of aroung 70 to 85 degrees
+
 NetworkTables.initialize(server='10.15.15.2')
 table = NetworkTables.getTable('FRCMap')
 

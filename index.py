@@ -1,12 +1,8 @@
 from bluePipeline import bluePipeline
 from redPipeline import redPipeline
 import cv2
-
+#bottom of camera 15 incehs above ground, and angle of aroung 70 to 85 degrees
 cap = cv2.VideoCapture(0)
-# 39000, 34000
-#3600, 3200
-#900, 700
-#width of 480, height of 360
 cap.set(cv2.CAP_PROP_EXPOSURE,-5)
 blue = bluePipeline()
 red = redPipeline()
@@ -22,26 +18,20 @@ while True:
     red.process(frame)
     cv2.imshow('frame', red.cv_dilate_output)
     img = frame.copy()
-    cv2.imshow('frame1', red.resize_image_output)
-    # if red.filter_contours_output:
-    #     print("ball")
-    # else:
-    #     print("no ball")
+    cv2.imshow('frame1', img)
     contours = red.filter_contours_output
     maxArea = 0
     maxIndex = 0
+    width = 480
     if contours:
         for i in range(len(contours)):
             if cv2.contourArea(contours[i])> maxArea:
                 maxArea = cv2.contourArea(contours[i])
                 maxIndex = i
         contour = contours[maxIndex]
-        #sending distance and offset to network tables
-        print(findDist(cv2.contourArea(contour)))
         (cx, cy), radius = cv2.minEnclosingCircle(contour)
-        width = 480
-        #print(offset(cx, width))
-    cv2.drawContours(image=img, contours=red.filter_contours_output, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
+        print(offset(cx, width))
+        print(findDist(cv2.contourArea(contour)))
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 cap.release()

@@ -12,20 +12,12 @@ class bluePipeline:
         """initializes all values to presets or None if need to be set
         """
 
-        self.__resize_image_width = 620.0
-        self.__resize_image_height = 480.0
-        self.__resize_image_interpolation = cv2.INTER_CUBIC
-
-        self.resize_image_output = None
-
-        self.__hsv_threshold_0_input = self.resize_image_output
         self.__hsv_threshold_0_hue = [40.6779661016949, 118.31282952548331]
         self.__hsv_threshold_0_saturation = [88.84180790960454, 201.2214411247803]
         self.__hsv_threshold_0_value = [2.401129943502825, 255.0]
 
         self.hsv_threshold_0_output = None
 
-        self.__hsv_threshold_1_input = self.resize_image_output
         self.__hsv_threshold_1_hue = [89.83050847457625, 113.5676625659051]
         self.__hsv_threshold_1_saturation = [81.63841807909603, 228.73442356001706]
         self.__hsv_threshold_1_value = [0.0, 255.0]
@@ -80,16 +72,13 @@ class bluePipeline:
         """
         Runs the pipeline and sets all outputs to new values.
         """
-        # Step Resize_Image0:
-        self.__resize_image_input = source0
-        (self.resize_image_output) = self.__resize_image(self.__resize_image_input, self.__resize_image_width, self.__resize_image_height, self.__resize_image_interpolation)
-
+        
         # Step HSV_Threshold0:
-        self.__hsv_threshold_0_input = self.resize_image_output
+        self.__hsv_threshold_0_input = source0
         (self.hsv_threshold_0_output) = self.__hsv_threshold(self.__hsv_threshold_0_input, self.__hsv_threshold_0_hue, self.__hsv_threshold_0_saturation, self.__hsv_threshold_0_value)
 
         # Step HSV_Threshold1:
-        self.__hsv_threshold_1_input = self.resize_image_output
+        self.__hsv_threshold_1_input = source0
         (self.hsv_threshold_1_output) = self.__hsv_threshold(self.__hsv_threshold_1_input, self.__hsv_threshold_1_hue, self.__hsv_threshold_1_saturation, self.__hsv_threshold_1_value)
 
         # Step CV_add0:
@@ -112,20 +101,6 @@ class bluePipeline:
         # Step Filter_Contours0:
         self.__filter_contours_contours = self.find_contours_output
         (self.filter_contours_output) = self.__filter_contours(self.__filter_contours_contours, self.__filter_contours_min_area, self.__filter_contours_min_perimeter, self.__filter_contours_min_width, self.__filter_contours_max_width, self.__filter_contours_min_height, self.__filter_contours_max_height, self.__filter_contours_solidity, self.__filter_contours_max_vertices, self.__filter_contours_min_vertices, self.__filter_contours_min_ratio, self.__filter_contours_max_ratio)
-
-
-    @staticmethod
-    def __resize_image(input, width, height, interpolation):
-        """Scales and image to an exact size.
-        Args:
-            input: A numpy.ndarray.
-            Width: The desired width in pixels.
-            Height: The desired height in pixels.
-            interpolation: Opencv enum for the type fo interpolation.
-        Returns:
-            A numpy.ndarray of the new size.
-        """
-        return cv2.resize(input, ((int)(width), (int)(height)), 0, 0, interpolation)
 
     @staticmethod
     def __hsv_threshold(input, hue, sat, val):
