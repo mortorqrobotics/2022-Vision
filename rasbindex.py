@@ -35,10 +35,9 @@ def sendToTables(pipeline):
             maxIndex = i
     contour = contours[maxIndex]
     #sending distance and offset to network tables
-    distance = findDist(cv2.contourArea(contour)/2)
+    distance = findDist(cv2.contourArea(contour))
     (cx, cy), radius = cv2.minEnclosingCircle(contour)
-    width = 360
-    off = offset(cx, width)
+    off = offset(cx, 480)
     table.putNumber("Offset: ", off)
     table.putNumber("Distance: ", distance)
 
