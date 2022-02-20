@@ -37,9 +37,9 @@ def sendToTables(pipeline):
     #sending distance and offset to network tables
     distance = findDist(cv2.contourArea(contour)/2)
     (cx, cy), radius = cv2.minEnclosingCircle(contour)
-    width = 320
-    lol = offset(cx, width)
-    table.putNumber("Offset: ", lol)
+    width = 360
+    off = offset(cx, width)
+    table.putNumber("Offset: ", off)
     table.putNumber("Distance: ", distance)
 
 while True:

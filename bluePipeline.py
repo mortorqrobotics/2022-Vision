@@ -12,8 +12,8 @@ class bluePipeline:
         """initializes all values to presets or None if need to be set
         """
 
-        self.__resize_image_width = 320.0
-        self.__resize_image_height = 240.0
+        self.__resize_image_width = 480.0
+        self.__resize_image_height = 360.0
         self.__resize_image_interpolation = cv2.INTER_CUBIC
 
         self.resize_image_output = None

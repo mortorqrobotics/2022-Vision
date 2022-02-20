@@ -6,7 +6,8 @@ cap = cv2.VideoCapture(1)
 # 39000, 34000
 #3600, 3200
 #900, 700
-#cap.set(cv2.CAP_PROP_EXPOSURE,-5)
+#width of 480, height of 360
+cap.set(cv2.CAP_PROP_EXPOSURE,-5)
 blue = bluePipeline()
 red = redPipeline()
 def findDist(area):
@@ -36,9 +37,9 @@ while True:
                 maxIndex = i
         contour = contours[maxIndex]
         #sending distance and offset to network tables
-        print(findDist(cv2.contourArea(contour)*4))
+        print(cv2.contourArea(contour)*4)
         (cx, cy), radius = cv2.minEnclosingCircle(contour)
-        width = 320
+        width = 360
         #print(offset(cx, width))
     cv2.drawContours(image=img, contours=red.filter_contours_output, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
     if cv2.waitKey(1) & 0xFF == ord('q'):
