@@ -2,10 +2,10 @@ from bluePipeline import bluePipeline
 from redPipeline import redPipeline
 import cv2
 #bottom of camera 15 incehs above ground, and angle of aroung 70 to 85 degrees
-cap = cv2.VideoCapture(1)
-cap.set(cv2.CAP_PROP_EXPOSURE,-5)
+cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_EXPOSURE,-4)
 blue = bluePipeline()
-red = redPipeline()
+red = bluePipeline()
 def findDist(area):
     dis = 615000*(1/(area+2000))+12.2
     meters = round((0.0254*dis), 3)
@@ -22,7 +22,7 @@ while True:
     contours = red.filter_contours_output
     maxArea = 0
     maxIndex = 0
-    width = 480
+    width = 620
     if contours:
         for i in range(len(contours)):
             if cv2.contourArea(contours[i])> maxArea:
@@ -30,7 +30,7 @@ while True:
                 maxIndex = i
         contour = contours[maxIndex]
         (cx, cy), radius = cv2.minEnclosingCircle(contour)
-        print(offset(cx, width))
+        #print(offset(cx, width))
         print(findDist(cv2.contourArea(contour)))
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
