@@ -2,7 +2,7 @@ from bluePipeline import bluePipeline
 from redPipeline import redPipeline
 import cv2
 #bottom of camera 15 incehs above ground, and angle of aroung 70 to 85 degrees
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_EXPOSURE,-5)
 blue = bluePipeline()
 red = redPipeline()
