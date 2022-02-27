@@ -7,8 +7,26 @@ cap.set(cv2.CAP_PROP_EXPOSURE,-4)
 blue = bluePipeline()
 red = redPipeline()
 
+__resize_image_width = 320 
+__resize_image_height = 240
+__resize_image_interpolation = cv2.INTER_CUBIC
+resize_image_output = None
+
 #select pipeline
 pipeline = red
+
+@staticmethod
+def __resize_image(input, width, height, interpolation):
+    """Scales and image to an exact size.
+    Args:
+        input: A numpy.ndarray.
+        Width: The desired width in pixels.
+        Height: The desired height in pixels.
+        interpolation: Opencv enum for the type fo interpolation.
+    Returns:
+        A numpy.ndarray of the new size.
+    """
+    return cv2.resize(input, ((int)(width), (int)(height)), 0, 0, interpolation)
 
 def findDist(area):
     dis = 615000*(1/(area+2000))+12.2
@@ -19,9 +37,11 @@ def offset(cx,width):
 while True:
     # printing distance from pipeline code
     ret, frame = cap.read()
-    pipeline.process(frame)
+    # Step Resize_Image0:
+    resize_image_output = __resize_image(frame, __resize_image_width, __resize_image_height, __resize_image_interpolation)
+    pipeline.process(resize_image_output)
    # cv2.imshow('frame', pipeline.cv_dilate_output)
-    cv2.imshow('frame', pipeline.resize_image_output)
+    cv2.imshow('frame', resize_image_output)
     #img = frame.copy()
     #cv2.imshow('frame1', img)
     contours = pipeline.filter_contours_output
