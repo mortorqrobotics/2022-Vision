@@ -11,11 +11,11 @@ red = redPipeline()
 pipeline = red
 
 def findDist(area):
-    dis = 615000*(1/(area+2000))+12.2
-    meters = round((0.0254*dis), 3)
+    dis = 5.64 + -1.87E-03*area + 3.15E-07 * area**2 + -1.83E-11 * area**3
+    meters = round((100*dis), 3)
     return meters
 def offset(cx,width):
-    return (width/2)-cx
+    return (width/2)-(cx/2)
 while True:
     # printing distance from pipeline code
     ret, frame = cap.read()
