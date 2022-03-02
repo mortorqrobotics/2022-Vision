@@ -1,3 +1,4 @@
+import math
 from bluePipeline import bluePipeline
 from redPipeline import redPipeline
 import cv2
@@ -11,7 +12,7 @@ red = redPipeline()
 pipeline = red
 
 def findDist(area):
-    dis = 5.64 + -1.87E-03*area + 3.15E-07 * area**2 + -1.83E-11 * area**3
+    dis = 9.32 + -0.846*math.log(area)
     meters = round((100*dis), 3)
     return meters
 def offset(cx,width):
